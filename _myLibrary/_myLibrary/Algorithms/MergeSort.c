@@ -17,7 +17,7 @@ void _MergeSort_impl(Element* list, Element* sorted, const int left, const int r
 	for (int i = left; i <= right; i++) list[i] = sorted[i];
 }
 Element* MergeSort(Element* list, const int size) {
-	Element* sorted = calloc(size, sizeof(Element));
+	Element* sorted = calloc(size, sizeof(Element)); if (!sorted) exit(1);
 	_MergeSort_impl(list, sorted, 0, size - 1);
 	free(sorted);
 	return list;
