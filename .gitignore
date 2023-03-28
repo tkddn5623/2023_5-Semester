@@ -55,10 +55,10 @@ dkms.conf
 .ipynb_checkpoints
 
 # .vs and .vscode
-
 .vs/
 .vscode/
 
 # exercise directory
 _exercise/
 */not_my_codes/not_my_codes_ex
+*/not_my_codes/python_ex
