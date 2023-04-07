@@ -5,9 +5,9 @@ grammar Expr;
 prog	:	(expr NEWLINE* )* ;
 
 expr	:	expr ('*'|'/') expr
-	|	expr ('+'|'-') expr
-	|	INT
-	|	'(' expr ')' ;
+		|	expr ('+'|'-') expr
+		|	INT
+		|	'(' expr ')' ;
 
 // lexer rules
 NEWLINE	:	[\n\r] ;
