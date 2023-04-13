@@ -2,10 +2,12 @@
 grammar Expr;
 
 // parser rules
-prog: (stmt NEWLINE*)*;
+// prog: (stmt NEWLINE*)*;
+prog: (stmt ';' NEWLINE*)*;
 
-stmt: ID '=' stmt
-    | expr;
+stmt: assn | expr;
+
+assn: ID '=' stmt;
 
 expr: expr ('+' | '-') term
     | term;

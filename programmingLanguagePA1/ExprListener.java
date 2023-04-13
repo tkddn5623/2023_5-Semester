@@ -27,6 +27,16 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitStmt(ExprParser.StmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExprParser#assn}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssn(ExprParser.AssnContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#assn}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssn(ExprParser.AssnContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ExprParser#expr}.
 	 * @param ctx the parse tree
 	 */

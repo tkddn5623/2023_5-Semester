@@ -19,8 +19,20 @@ public:
   virtual void enterProg(ExprParser::ProgContext * /*ctx*/) override { }
   virtual void exitProg(ExprParser::ProgContext * /*ctx*/) override { }
 
+  virtual void enterStmt(ExprParser::StmtContext * /*ctx*/) override { }
+  virtual void exitStmt(ExprParser::StmtContext * /*ctx*/) override { }
+
+  virtual void enterAssn(ExprParser::AssnContext * /*ctx*/) override { }
+  virtual void exitAssn(ExprParser::AssnContext * /*ctx*/) override { }
+
   virtual void enterExpr(ExprParser::ExprContext * /*ctx*/) override { }
   virtual void exitExpr(ExprParser::ExprContext * /*ctx*/) override { }
+
+  virtual void enterTerm(ExprParser::TermContext * /*ctx*/) override { }
+  virtual void exitTerm(ExprParser::TermContext * /*ctx*/) override { }
+
+  virtual void enterFactor(ExprParser::FactorContext * /*ctx*/) override { }
+  virtual void exitFactor(ExprParser::FactorContext * /*ctx*/) override { }
 
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }
