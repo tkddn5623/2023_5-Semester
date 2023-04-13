@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <map>
+#include <set>
 #include "antlr4-cpp/ExprBaseListener.h"
 #include "antlr4-cpp/ExprLexer.h"
 #include "antlr4-cpp/ExprParser.h"
@@ -25,6 +26,8 @@ public:
 	virtual void visitTerminal(tree::TerminalNode *node) {
 		cout << "\t\tTerminal: " << node->getText() << "\n";
 	}
+private:
+	int a = 0;
 };
 
 int main(int argc, const char* argv[]) {
@@ -36,7 +39,7 @@ int main(int argc, const char* argv[]) {
 	stream.open(argv[1]);
 	if (stream.fail()) {
 		cerr << argv[1] << " : file open fail\n";
-		exit(0);
+		exit(1);
 	}
 
 	ANTLRInputStream input(stream);
@@ -48,5 +51,4 @@ int main(int argc, const char* argv[]) {
 	EvalListener listener;	
 
 	walker.walk(&listener, parser.prog());
-	stream.close()
 }

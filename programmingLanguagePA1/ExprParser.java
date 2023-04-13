@@ -1,4 +1,4 @@
-// Generated from /mnt/hgfs/!!Programming projects/2022_5-Semester/programmingLanguagePA1/Expr.g4 by ANTLR 4.9.2
+// Generated from java-escape by ANTLR 4.11.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class ExprParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.11.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -74,7 +74,7 @@ public class ExprParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Expr.g4"; }
+	public String getGrammarFileName() { return "java-escape"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -90,6 +90,7 @@ public class ExprParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ProgContext extends ParserRuleContext {
 		public List<StmtContext> stmt() {
 			return getRuleContexts(StmtContext.class);
@@ -105,6 +106,14 @@ public class ExprParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_prog; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterProg(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitProg(this);
+		}
 	}
 
 	public final ProgContext prog() throws RecognitionException {
@@ -117,7 +126,7 @@ public class ExprParser extends Parser {
 			setState(19);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__6) | (1L << NUMBER) | (1L << ID))) != 0)) {
+			while (((_la) & ~0x3f) == 0 && ((1L << _la) & 1664L) != 0) {
 				{
 				{
 				setState(10);
@@ -155,6 +164,7 @@ public class ExprParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StmtContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(ExprParser.ID, 0); }
 		public StmtContext stmt() {
@@ -167,6 +177,14 @@ public class ExprParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterStmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitStmt(this);
+		}
 	}
 
 	public final StmtContext stmt() throws RecognitionException {
@@ -207,6 +225,7 @@ public class ExprParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExprContext extends ParserRuleContext {
 		public TermContext term() {
 			return getRuleContext(TermContext.class,0);
@@ -218,6 +237,14 @@ public class ExprParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitExpr(this);
+		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -286,6 +313,7 @@ public class ExprParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class TermContext extends ParserRuleContext {
 		public FactorContext factor() {
 			return getRuleContext(FactorContext.class,0);
@@ -297,6 +325,14 @@ public class ExprParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_term; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterTerm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitTerm(this);
+		}
 	}
 
 	public final TermContext term() throws RecognitionException {
@@ -335,7 +371,7 @@ public class ExprParser extends Parser {
 					if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 					setState(43);
 					_la = _input.LA(1);
-					if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << T__4) | (1L << T__5))) != 0)) ) {
+					if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 112L) != 0) ) {
 					_errHandler.recoverInline(this);
 					}
 					else {
@@ -365,6 +401,7 @@ public class ExprParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class FactorContext extends ParserRuleContext {
 		public StmtContext stmt() {
 			return getRuleContext(StmtContext.class,0);
@@ -375,6 +412,14 @@ public class ExprParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_factor; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterFactor(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitFactor(this);
+		}
 	}
 
 	public final FactorContext factor() throws RecognitionException {
@@ -449,23 +494,43 @@ public class ExprParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\22=\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\7\2\17\n\2\f\2\16\2\22\13\2\7\2\24"+
-		"\n\2\f\2\16\2\27\13\2\3\3\3\3\3\3\3\3\5\3\35\n\3\3\4\3\4\3\4\3\4\3\4\3"+
-		"\4\7\4%\n\4\f\4\16\4(\13\4\3\5\3\5\3\5\3\5\3\5\3\5\7\5\60\n\5\f\5\16\5"+
-		"\63\13\5\3\6\3\6\3\6\3\6\3\6\3\6\5\6;\n\6\3\6\2\4\6\b\7\2\4\6\b\n\2\4"+
-		"\3\2\4\5\3\2\6\b\2>\2\25\3\2\2\2\4\34\3\2\2\2\6\36\3\2\2\2\b)\3\2\2\2"+
-		"\n:\3\2\2\2\f\20\5\4\3\2\r\17\7\22\2\2\16\r\3\2\2\2\17\22\3\2\2\2\20\16"+
-		"\3\2\2\2\20\21\3\2\2\2\21\24\3\2\2\2\22\20\3\2\2\2\23\f\3\2\2\2\24\27"+
-		"\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\3\3\2\2\2\27\25\3\2\2\2\30\31"+
-		"\7\f\2\2\31\32\7\3\2\2\32\35\5\4\3\2\33\35\5\6\4\2\34\30\3\2\2\2\34\33"+
-		"\3\2\2\2\35\5\3\2\2\2\36\37\b\4\1\2\37 \5\b\5\2 &\3\2\2\2!\"\f\4\2\2\""+
-		"#\t\2\2\2#%\5\b\5\2$!\3\2\2\2%(\3\2\2\2&$\3\2\2\2&\'\3\2\2\2\'\7\3\2\2"+
-		"\2(&\3\2\2\2)*\b\5\1\2*+\5\n\6\2+\61\3\2\2\2,-\f\4\2\2-.\t\3\2\2.\60\5"+
-		"\n\6\2/,\3\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\t\3\2\2\2"+
-		"\63\61\3\2\2\2\64\65\7\t\2\2\65\66\5\4\3\2\66\67\7\n\2\2\67;\3\2\2\28"+
-		";\7\13\2\29;\7\f\2\2:\64\3\2\2\2:8\3\2\2\2:9\3\2\2\2;\13\3\2\2\2\b\20"+
-		"\25\34&\61:";
+		"\u0004\u0001\u0010;\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0001"+
+		"\u0000\u0001\u0000\u0005\u0000\r\b\u0000\n\u0000\f\u0000\u0010\t\u0000"+
+		"\u0005\u0000\u0012\b\u0000\n\u0000\f\u0000\u0015\t\u0000\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0003\u0001\u001b\b\u0001\u0001\u0002\u0001"+
+		"\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0005\u0002#\b"+
+		"\u0002\n\u0002\f\u0002&\t\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001"+
+		"\u0003\u0001\u0003\u0001\u0003\u0005\u0003.\b\u0003\n\u0003\f\u00031\t"+
+		"\u0003\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0003\u00049\b\u0004\u0001\u0004\u0000\u0002\u0004\u0006\u0005"+
+		"\u0000\u0002\u0004\u0006\b\u0000\u0002\u0001\u0000\u0002\u0003\u0001\u0000"+
+		"\u0004\u0006<\u0000\u0013\u0001\u0000\u0000\u0000\u0002\u001a\u0001\u0000"+
+		"\u0000\u0000\u0004\u001c\u0001\u0000\u0000\u0000\u0006\'\u0001\u0000\u0000"+
+		"\u0000\b8\u0001\u0000\u0000\u0000\n\u000e\u0003\u0002\u0001\u0000\u000b"+
+		"\r\u0005\u0010\u0000\u0000\f\u000b\u0001\u0000\u0000\u0000\r\u0010\u0001"+
+		"\u0000\u0000\u0000\u000e\f\u0001\u0000\u0000\u0000\u000e\u000f\u0001\u0000"+
+		"\u0000\u0000\u000f\u0012\u0001\u0000\u0000\u0000\u0010\u000e\u0001\u0000"+
+		"\u0000\u0000\u0011\n\u0001\u0000\u0000\u0000\u0012\u0015\u0001\u0000\u0000"+
+		"\u0000\u0013\u0011\u0001\u0000\u0000\u0000\u0013\u0014\u0001\u0000\u0000"+
+		"\u0000\u0014\u0001\u0001\u0000\u0000\u0000\u0015\u0013\u0001\u0000\u0000"+
+		"\u0000\u0016\u0017\u0005\n\u0000\u0000\u0017\u0018\u0005\u0001\u0000\u0000"+
+		"\u0018\u001b\u0003\u0002\u0001\u0000\u0019\u001b\u0003\u0004\u0002\u0000"+
+		"\u001a\u0016\u0001\u0000\u0000\u0000\u001a\u0019\u0001\u0000\u0000\u0000"+
+		"\u001b\u0003\u0001\u0000\u0000\u0000\u001c\u001d\u0006\u0002\uffff\uffff"+
+		"\u0000\u001d\u001e\u0003\u0006\u0003\u0000\u001e$\u0001\u0000\u0000\u0000"+
+		"\u001f \n\u0002\u0000\u0000 !\u0007\u0000\u0000\u0000!#\u0003\u0006\u0003"+
+		"\u0000\"\u001f\u0001\u0000\u0000\u0000#&\u0001\u0000\u0000\u0000$\"\u0001"+
+		"\u0000\u0000\u0000$%\u0001\u0000\u0000\u0000%\u0005\u0001\u0000\u0000"+
+		"\u0000&$\u0001\u0000\u0000\u0000\'(\u0006\u0003\uffff\uffff\u0000()\u0003"+
+		"\b\u0004\u0000)/\u0001\u0000\u0000\u0000*+\n\u0002\u0000\u0000+,\u0007"+
+		"\u0001\u0000\u0000,.\u0003\b\u0004\u0000-*\u0001\u0000\u0000\u0000.1\u0001"+
+		"\u0000\u0000\u0000/-\u0001\u0000\u0000\u0000/0\u0001\u0000\u0000\u0000"+
+		"0\u0007\u0001\u0000\u0000\u00001/\u0001\u0000\u0000\u000023\u0005\u0007"+
+		"\u0000\u000034\u0003\u0002\u0001\u000045\u0005\b\u0000\u000059\u0001\u0000"+
+		"\u0000\u000069\u0005\t\u0000\u000079\u0005\n\u0000\u000082\u0001\u0000"+
+		"\u0000\u000086\u0001\u0000\u0000\u000087\u0001\u0000\u0000\u00009\t\u0001"+
+		"\u0000\u0000\u0000\u0006\u000e\u0013\u001a$/8";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

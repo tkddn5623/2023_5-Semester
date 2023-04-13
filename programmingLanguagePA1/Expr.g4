@@ -2,15 +2,28 @@
 grammar Expr;
 
 // parser rules
-prog	:	(expr NEWLINE* )* ;
+prog: (stmt NEWLINE*)*;
 
-expr	:	expr ('*'|'/') expr
-		|	expr ('+'|'-') expr
-		|	INT
-		|	'(' expr ')' ;
+stmt: ID '=' stmt
+    | expr;
+
+expr: expr ('+' | '-') term
+    | term;
+
+term: term ('*' | '/' | '%') factor
+    | factor;
+
+factor: '(' stmt ')'
+      | NUMBER
+      | ID;
+
 
 // lexer rules
-NEWLINE	:	[\n\r] ;
-INT	:	[0-9]+ ;
-WS	:	[ \t\r\n]+ -> skip ;
- 
+NUMBER:   INT | FLOAT;
+ID:       LETTER (LETTER | DIGIT)*;
+INT:      ('-')?(DIGIT)+;
+FLOAT:    ('-')?((DIGIT)* ('.' DIGIT | DIGIT '.') (DIGIT)*);
+DIGIT:    [0-9];
+LETTER:   [a-zA-Z_];
+WS:       [ \t\r\n]+ -> skip;
+NEWLINE:  [\n\r];
