@@ -17,6 +17,9 @@ public:
   virtual void enterProg(ExprParser::ProgContext *ctx) = 0;
   virtual void exitProg(ExprParser::ProgContext *ctx) = 0;
 
+  virtual void enterTerminator(ExprParser::TerminatorContext *ctx) = 0;
+  virtual void exitTerminator(ExprParser::TerminatorContext *ctx) = 0;
+
   virtual void enterStmt(ExprParser::StmtContext *ctx) = 0;
   virtual void exitStmt(ExprParser::StmtContext *ctx) = 0;
 

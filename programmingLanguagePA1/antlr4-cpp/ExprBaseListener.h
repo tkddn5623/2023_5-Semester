@@ -19,6 +19,9 @@ public:
   virtual void enterProg(ExprParser::ProgContext * /*ctx*/) override { }
   virtual void exitProg(ExprParser::ProgContext * /*ctx*/) override { }
 
+  virtual void enterTerminator(ExprParser::TerminatorContext * /*ctx*/) override { }
+  virtual void exitTerminator(ExprParser::TerminatorContext * /*ctx*/) override { }
+
   virtual void enterStmt(ExprParser::StmtContext * /*ctx*/) override { }
   virtual void exitStmt(ExprParser::StmtContext * /*ctx*/) override { }
 

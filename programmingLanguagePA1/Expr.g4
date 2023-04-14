@@ -1,31 +1,30 @@
 /* Expr.g4 */
 grammar Expr;
 
-// parser rules
-// prog: (stmt NEWLINE*)*;
-prog: (stmt ';' NEWLINE*)*;
+// parser rules prog: (stmt NEWLINE*)*;
+prog: (stmt terminator NEWLINE*)*;
+
+terminator: (';')+;
 
 stmt: assn | expr;
 
-assn: ID '=' stmt;
+assn: ID OPERATOR1 stmt;
 
-expr: expr ('+' | '-') term
-    | term;
+expr: expr OPERATOR2 term | term;
 
-term: term ('*' | '/' | '%') factor
-    | factor;
+term: term OPERATOR3 factor | factor;
 
-factor: '(' stmt ')'
-      | NUMBER
-      | ID;
-
+factor: '(' stmt ')' | NUMBER | ID;
 
 // lexer rules
-NUMBER:   INT | FLOAT;
-ID:       LETTER (LETTER | DIGIT)*;
-INT:      ('-')?(DIGIT)+;
-FLOAT:    ('-')?((DIGIT)* ('.' DIGIT | DIGIT '.') (DIGIT)*);
-DIGIT:    [0-9];
-LETTER:   [a-zA-Z_];
-WS:       [ \t\r\n]+ -> skip;
-NEWLINE:  [\n\r];
+OPERATOR1: '=';
+OPERATOR2: ('+' | '-');
+OPERATOR3: ('*' | '/');
+NUMBER: INT | FLOAT;
+ID: LETTER (LETTER | DIGIT)*;
+INT: (('-' | '+'))? (DIGIT)+;
+FLOAT: (('-' | '+'))? ((DIGIT)* ('.' DIGIT | DIGIT '.') (DIGIT)*);
+DIGIT: [0-9];
+LETTER: [a-zA-Z_];
+WS: [ \t\r\n]+ -> skip;
+NEWLINE: [\n\r];
