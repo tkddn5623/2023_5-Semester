@@ -14,7 +14,7 @@ expr: expr OPERATOR2 term | term;
 
 term: term OPERATOR3 factor | factor;
 
-factor: '(' stmt ')' | NUMBER | ID;
+factor: OPERATOR2 factor | '(' stmt ')' | NUMBER | ID;
 
 // lexer rules
 OPERATOR1: '=';
@@ -22,8 +22,8 @@ OPERATOR2: ('+' | '-');
 OPERATOR3: ('*' | '/');
 NUMBER: INT | FLOAT;
 ID: LETTER (LETTER | DIGIT)*;
-INT: (('-' | '+'))? (DIGIT)+;
-FLOAT: (('-' | '+'))? ((DIGIT)* ('.' DIGIT | DIGIT '.') (DIGIT)*);
+INT: (DIGIT)+;
+FLOAT: ((DIGIT)* ('.' DIGIT | DIGIT '.') (DIGIT)*);
 DIGIT: [0-9];
 LETTER: [a-zA-Z_];
 WS: [ \t\r\n]+ -> skip;
