@@ -60,6 +60,9 @@
     <ClInclude Include="Data Structures\SegmentTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="QuickSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Main.c">
@@ -103,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="Data Structures\SegmentTree.c">
       <Filter>Source Files\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="QuickSort.c">
+      <Filter>Source Files\Algorithms</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -153,6 +153,7 @@
     <ClInclude Include="Data Structures\SegmentTree.h" />
     <ClInclude Include="Data Structures\UnionFind.h" />
     <ClInclude Include="Data Structures\Hashtable.h" />
+    <ClInclude Include="QuickSort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algorithms\BinarySearch.c" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Data Structures\SegmentTree.c" />
     <ClCompile Include="Data Structures\UnionFind.c" />
     <ClCompile Include="Data Structures\Hashtable.c" />
+    <ClCompile Include="QuickSort.c" />
     <ClCompile Include="_Main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
