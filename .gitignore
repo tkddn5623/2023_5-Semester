@@ -60,5 +60,6 @@ dkms.conf
 
 # exercise directory
 _exercise/
+_python
 */not_my_codes/not_my_codes_ex
 */not_my_codes/python_ex

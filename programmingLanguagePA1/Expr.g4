@@ -1,6 +1,7 @@
 /* Expr.g4 */
 grammar Expr;
 
+<<<<<<< Updated upstream
 // parser rules prog: (stmt NEWLINE*)*;
 prog: (stmt terminator NEWLINE*)*;
 
@@ -28,3 +29,18 @@ DIGIT: [0-9];
 LETTER: [a-zA-Z_];
 WS: [ \t\r\n]+ -> skip;
 NEWLINE: [\n\r];
+=======
+// parser rules
+prog: (expr NEWLINE*)*;
+
+expr: '(' expr ')'
+    | expr ('*' | '/') expr
+	| expr ('+' | '-') expr
+	| INT;
+
+// lexer rules
+NEWLINE: [\n\r];
+INT: [0-9]+;
+WS: [ \t\r\n]+ -> skip;
+
+>>>>>>> Stashed changes
