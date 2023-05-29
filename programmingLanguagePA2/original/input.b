@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string>
+#define string std::string
 
 auto main( ) {
     auto s, i, x, last = 100;

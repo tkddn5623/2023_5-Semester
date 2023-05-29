@@ -1,4 +1,4 @@
-# makefile for Expr Evaluation in C++
+# makefile for B2C in C++
 PROG=b2c
 G4=B.g4
 
@@ -9,7 +9,6 @@ LIBS=-lantlr4-runtime
 
 INPUT_B=input.b
 OUTPUT_C=output.c
-CC=gcc
 WFLAGS=-Wconversion -Wall -pedantic
 
 
@@ -29,7 +28,7 @@ antlr: $(G4)
 
 run: antlr $(PROG)
 	./$(PROG) $(INPUT_B) | indent > $(OUTPUT_C)
-	$(CC) $(WFLAGS) $(OUTPUT_C)
+	$(CXX) $(WFLAGS) $(OUTPUT_C)
 
 .PHONY: clean
 

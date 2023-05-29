@@ -132,6 +132,10 @@ WHILE:  'while' ;
 RETURN: 'return' ;
 ASSN:   '=' ;
 
+BOOL
+   : 'false'|'true'
+   ;
+
 NAME
    : [a-zA-Z] [a-zA-Z0-9_]*
    ;
@@ -150,10 +154,6 @@ STRING
 
 CHAR
    : '\'' . '\''
-   ;
-
-BOOL
-   : 'false'|'true'
    ;
 
 SHARP_DIRECTIVE
