@@ -1,5 +1,6 @@
 // B2CMain.cpp
 #include <iostream>
+#include <string.h>
 #include <map>
 #include <stack>
 #include "antlr4-runtime.h"
@@ -10,18 +11,33 @@
 using namespace std;
 using namespace antlr4;
 using namespace antlr4::tree;
-
-class TypeAnalysisVisitor : public BBaseVisitor {
-public:
-   // Building symbol tables,
-   // infer types for 'auto' variables and functions
-   // ...
+static enum {
+	INT, REAL, STRING, BOOL, CHAR, UNDEFINED
+} Tyenum;
+static const string types[] = {
+	"int", "double", "string", "bool", "char"
 };
 
+// Building symbol tables,
+// infer types for 'auto' variables and functions
+// ...
+class TypeAnalysisVisitor : public BBaseVisitor {
+public:
+
+};
+
+// Replace 'auto' in parse tree with inferred types
+// ...
 class TypeAugmentationVisitor : public BBaseVisitor {
 public:
-   // Replace 'auto' in parse tree with inferred types
-   // ...
+	any visitFuncdef(BParser::FuncdefContext* ctx) override {
+		string functionName = ctx->name(0)->getText();
+		// ctx->name(0).set
+		// You can retrieve and visit the parameter list using ctx->name(i)
+		// visit statement
+		visit(ctx->statement());
+		return nullptr;
+	}
 };
 
 class PrintTreeVisitor : public BBaseVisitor {
