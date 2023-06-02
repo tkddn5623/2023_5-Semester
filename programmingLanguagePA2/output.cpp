@@ -1,28 +1,16 @@
 /*-- B2C ANTLR visitor --*/
-// it return name asmain
-// it return name ass
-// it return name asi
-// it return name asx
-// it return name asx
-// it return name ass
-// it return name ass
-// it return name asi
-// it return name asi
-// it return name asi
-// it return name asx
-// it return name asi
-// it return name aslast
-// it return name asprintf
-// it return name aslast
-// it return name ass
-// it return name ass
+// Error:[Expression] (Type conflict occured.)::i
+// Error:[Expression] (Type conflict occured.)::i
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string>
 #define string std::string
-auto main(){
-auto s ,i ,x ,last = 100;
+double main(){
+double s;
+int i;
+bool x;
+int last = 100;
 s = 0.0;
 i = 1;
 x = true;
@@ -34,4 +22,3 @@ x = i < last;
 printf("sum(%d) = %f\n", last, s);
 return (s);
 }
-// scope{1}, [last], (30)
