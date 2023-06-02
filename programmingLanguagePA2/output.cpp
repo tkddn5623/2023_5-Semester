@@ -1,4 +1,21 @@
 /*-- B2C ANTLR visitor --*/
+// it return name asmain
+// it return name ass
+// it return name asi
+// it return name asx
+// it return name asx
+// it return name ass
+// it return name ass
+// it return name asi
+// it return name asi
+// it return name asi
+// it return name asx
+// it return name asi
+// it return name aslast
+// it return name asprintf
+// it return name aslast
+// it return name ass
+// it return name ass
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -17,3 +34,4 @@ x = i < last;
 printf("sum(%d) = %f\n", last, s);
 return (s);
 }
+// scope{1}, [last], (30)

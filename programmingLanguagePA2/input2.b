@@ -6,7 +6,9 @@
 
 auto c = "global";
 auto q_ = 555;
-auto func1(auto p1, auto p2){
+auto func1(auto, auto);
+auto func2(auto p1);
+auto func1(auto p1, auto p2) {
     printf("glboal c is %d\n", c);
     auto c = 1;
     printf("Now c is %d\n", c);
@@ -15,14 +17,19 @@ auto func1(auto p1, auto p2){
 auto func2(auto p1){
     return p1 * 10;
 }
+auto five() {
+    return 5;
+}
+auto global2 = 5;
 auto main() {
-    auto a, b, c, d, e, f, g;
+    auto a, b, c, d, W = 5, e, f, g, E = 7, fv;
     a = 5;
     b = 2.5;
     c = 1;
     d = "hello";
     e = true;
     f = 'c';
+    fv = five();
     // g = (char)65;
     // auto r = func1(a, b);
     printf("%d\n", c);

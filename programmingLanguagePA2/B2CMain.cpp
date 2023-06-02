@@ -3,6 +3,7 @@
 #include <string.h>
 #include <map>
 #include <stack>
+#include <queue>
 #include "antlr4-runtime.h"
 #include "antlr4-cpp/BBaseVisitor.h"
 #include "antlr4-cpp/BLexer.h"
@@ -11,33 +12,101 @@
 using namespace std;
 using namespace antlr4;
 using namespace antlr4::tree;
-static enum {
-	INT, REAL, STRING, BOOL, CHAR, UNDEFINED
-} Tyenum;
-static const string types[] = {
-	"int", "double", "string", "bool", "char"
-};
 
+static enum {
+	UNDEFINED, INT, REAL, STRING, BOOL, CHAR
+} typenum;
+static const string types[] = {
+	"UNDEFINED", "int", "double", "string", "bool", "char"
+};
+vector<map<string, int>> typemaps;
+vector<int> scope_prev;
+map<string, int> scope_func;
+
+int type_assign(string str, int lexer_num, int scope) {
+	auto tmap = &typemaps[scope];
+	auto it = tmap->find(str);
+	if (it == tmap->end() || it->second == lexer_num) {
+		tmap->insert_or_assign(str, lexer_num);
+		return 0;
+	}
+	else {
+		cout << "/* Error occur: type conflict*/ ";
+		tmap->insert_or_assign(str, 0);
+		return -1;
+	}
+}
+int type_search(string str, int scope) {
+	while (scope > -1) {
+		auto it = typemaps[scope].find(str);
+		if (it == typemaps[scope].end()) {
+			scope = scope_prev[scope];
+		}
+		else return it->second;
+	}
+	return 0;
+}
 // Building symbol tables,
 // infer types for 'auto' variables and functions
 // ...
 class TypeAnalysisVisitor : public BBaseVisitor {
 public:
-
-};
-
-// Replace 'auto' in parse tree with inferred types
-// ...
-class TypeAugmentationVisitor : public BBaseVisitor {
-public:
-	any visitFuncdef(BParser::FuncdefContext* ctx) override {
-		string functionName = ctx->name(0)->getText();
-		// ctx->name(0).set
-		// You can retrieve and visit the parameter list using ctx->name(i)
-		// visit statement
-		visit(ctx->statement());
+	any visitProgram(BParser::ProgramContext* ctx) override {
+		vector<int> visit_twice(ctx->children.size());
+		scope_prev.push_back(-1);
+		scope_stack.push(scope_prev.size() - 1);
+		typemaps.push_back(map<string, int>());
+		for (int i = 0; i < ctx->children.size(); i++) {
+			// visit(ctx->children[i]);
+			// cout << "// [" << ctx->children[i]->getText() << "]Detsu!\n";
+			visit(ctx->children[i]);
+		}
+		for (int i = 0; i < ctx->children.size(); i++) {
+			
+		}
 		return nullptr;
 	}
+	any visitAutostmt(BParser::AutostmtContext* ctx) override {
+		for (int i = 0, j = 0; i < ctx->name().size(); i++) {
+			string name = ctx->name(i)->getText();
+			int idx_assn = 1 + i * 2 + j * 2 + 1;  // auto name (= const)?, name (= const)?, ...
+			int lexer_num;
+			if (ctx->children[idx_assn]->getText().compare("=") == 0) {
+				if (ctx->constant(j)) {
+					auto c = ctx->constant(j);
+					if (c->INT()) lexer_num = BLexer::INT;
+					else if (c->REAL()) lexer_num = BLexer::REAL;
+					else if (c->STRING()) lexer_num = BLexer::STRING;
+					else if (c->BOOL()) lexer_num = BLexer::BOOL;
+					else if (c->CHAR()) lexer_num = BLexer::CHAR;
+					type_assign(name, lexer_num, scope_stack.top());
+					j++;
+				}
+			}
+		}
+		return nullptr;
+	}
+	any visitBlockstmt(BParser::BlockstmtContext* ctx) override {
+		scope_prev.push_back(scope_stack.top());
+		scope_stack.push(scope_prev.size() - 1);
+		typemaps.push_back(map<string, int>());
+		visitChildren(ctx);
+		scope_stack.pop();
+		return nullptr;
+
+	}
+	any visitName(BParser::NameContext* ctx) override {
+		cout << "// it return name as" << ctx->getText() << "\n";
+		return ctx->getText();
+	}
+	any visitConstant(BParser::ConstantContext* ctx) override {
+		// ctx->children[0].
+		// if(ctx->INT()) 
+		return nullptr;
+	}
+private:
+	stack<int> scope_stack;
+	// queue<ParserRuleContext*> context_queue;
 };
 
 class PrintTreeVisitor : public BBaseVisitor {
@@ -226,8 +295,8 @@ public:
     }
     
     any visitConstant(BParser::ConstantContext *ctx) override {
-        cout << ctx->children[0]->getText();
-        return nullptr;
+		cout << ctx->children[0]->getText();
+		return nullptr;
     }
     
     any visitName(BParser::NameContext *ctx) override {
@@ -266,13 +335,15 @@ int main(int argc, const char* argv[]) {
     TypeAnalysisVisitor AnalyzeTree;
     AnalyzeTree.visit(tree);
 
-    // STEP 2. visit parse tree and augment types for 'auto' typed variables --- you may skip this by keeping the class empty 
-    TypeAugmentationVisitor AugmentTree;
-    AugmentTree.visit(tree);
-
     // STEP 3. visit parse tree and print out C code with augmented types
     PrintTreeVisitor PrintTree;
     PrintTree.visit(tree);
 
-    return 0;
+	for (int i = 0; i < typemaps.size(); i++) {
+		for (auto it = typemaps[i].begin(); it != typemaps[i].end(); it++) {
+			cout << "// scope{" << i << "}, [" << it->first << "], (" << it->second << ")\n";
+		}
+	}
+
+	return 0;
 }
