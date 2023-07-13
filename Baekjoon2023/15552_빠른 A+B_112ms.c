@@ -9,15 +9,13 @@ static char* map;
 void writeint(int n) {
 	char s[12] = { '0' };
 	int i = 0;
-	if (n) {
-		int j = 1000;
-		while (!(n / j)) { j /= 10; }
-		do {
-			s[i++] = '0' | n / j;
-			n %= j;
-			j /= 10;
-		} while (j);
-	}
+	int j = 1000;
+	while (n > 0 && !(n / j)) { j /= 10; }
+	do {
+		s[i++] = '0' | n / j;
+		n %= j;
+		j /= 10;
+	} while (j);
 	printf("%s\n", s);
 }
 int readint() {

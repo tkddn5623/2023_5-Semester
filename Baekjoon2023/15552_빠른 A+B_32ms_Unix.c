@@ -6,17 +6,24 @@ static char* map;
 static char output[5000001];
 static int output_i;
 void writeint(int n) {
-	if (n) {
-		int j = 1000;
-		while (!(n / j)) { j /= 10; }
-		do {
-			output[output_i++] = '0' | n / j;
-			n %= j;
-			j /= 10;
-		} while (j);
-	}
+	int j = 1000;
+	while (n > 1 && !(n / j)) { j /= 10; }
+	do {
+		output[output_i++] = '0' | n / j;
+		n %= j;
+		j /= 10;
+	} while (j);
 	output[output_i++] = '\n';
 }
+/*
+int readint() {
+    int a, b, c;
+    while ((c = *input) && c < '-') input++;
+    if (c == '-') input++;
+    for (b = *input++ & 0xf; (a = *input++) >= '0'; b = b * 10 + (a & 0xf));
+    return c == '-' ? -b : b;
+}
+*/
 int readint() {
 	int a, b;
 	while ((a = *map++) && a < '0');
