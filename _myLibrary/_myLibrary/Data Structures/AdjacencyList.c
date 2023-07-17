@@ -14,7 +14,7 @@ typedef struct {
 	GNode* _edges;
 } Graph;
 */
-Graph* GR_newGraph(const int vtxsize, const int edgesize) {
+Graph* GR_new(int vtxsize, int edgesize) {
 	Graph* graph;
 	if ((graph = malloc(sizeof(Graph))) == NULL) exit(1);
 	if ((graph->tails = calloc(vtxsize, sizeof(GNode*))) == NULL) exit(1);
@@ -28,12 +28,12 @@ Graph* GR_newGraph(const int vtxsize, const int edgesize) {
 	}
 	return graph;
 }
-void GR_deleteGraph(Graph* graph) {
+void GR_delete(Graph* graph) {
 	free(graph->_edges);
 	free(graph->tails);
 	free(graph);
 }
-void GR_addEdge(Graph* graph, const int from, const int to, const int weight) {
+void GR_addEdge(Graph* graph, int from, int to, int weight) {
 	graph->_edges[graph->edgecount].id = to;
 	graph->_edges[graph->edgecount].weight = weight;
 	graph->_edges[graph->edgecount].next = graph->tails[from]->next;

@@ -50,3 +50,40 @@ Element AQ_pop(ArrayQueue* pqueue) {
 	pqueue->front = (front + 1) % pqueue->capacity;
 	return pqueue->items[front];
 }
+
+// The Simple Linear Queue (2023.7.17 Mon)
+/* 
+
+typedef int Element;
+typedef struct {
+	Element* items;
+	int front;
+	int rear;
+} ArrayQueue;
+ArrayQueue* AQ_new(int max) {
+	ArrayQueue* pqueue;
+	if (!(pqueue = malloc(sizeof(ArrayQueue)))) exit(1);
+	if (!(pqueue->items = calloc(max, sizeof(Element)))) exit(1);
+	return pqueue;
+}
+void AQ_delete(ArrayQueue* pqueue) {
+	free(pqueue->items);
+	free(pqueue);
+}
+int AQ_isEmpty(const ArrayQueue* pqueue) {
+	return pqueue->front == pqueue->rear;
+}
+int AQ_size(const ArrayQueue* pqueue) {
+	return pqueue->rear - pqueue->front;
+}
+Element AQ_front(const ArrayQueue* pqueue) {
+	return pqueue->items[pqueue->front];
+}
+void AQ_push(ArrayQueue* pqueue, Element item) {
+	pqueue->items[pqueue->rear++] = item;
+}
+Element AQ_pop(ArrayQueue* pqueue) {
+	return pqueue->items[pqueue->front++];
+}
+
+*/
