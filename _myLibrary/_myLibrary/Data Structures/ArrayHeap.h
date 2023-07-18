@@ -14,11 +14,11 @@ typedef struct {
 	int capacity;
 	int size;
 } ArrayHeap;
-ArrayHeap* AH_newHeap(const int max);
-void AH_deleteHeap(ArrayHeap* pheap);
-int AH_isEmpty(const ArrayHeap* pheap);
-int AH_isFull(const ArrayHeap* pheap);
-void AH_push(ArrayHeap* pheap, const Element item, const int priority);
+ArrayHeap* AH_new(int max);
+void AH_delete(ArrayHeap* pheap);
+int AH_isEmpty(ArrayHeap* pheap);
+void AH_push(ArrayHeap* pheap, Element item, int priority);
 Element AH_pop(ArrayHeap* pheap);
-void AH_heapSort(Element* Base, const int NumOfElement);
+void AH_heapSort(Element* Base, int NumOfElement);
+// int AH_isFull(ArrayHeap* pheap);
 #endif
