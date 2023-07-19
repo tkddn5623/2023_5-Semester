@@ -1,8 +1,7 @@
-// Trie Practice; boj 5052
-#include <stdio.h>
 #include <stdlib.h>
-#define MAXROW (10000)
-#define MAXCOL (10)
+#include "Trie.h"
+/*
+#define MAXCOL (26)
 typedef struct _TreeNode {
 	struct _TreeNode* next[MAXCOL];
 	int state; // 1st bit: is final state?, 2nd bit: does it have child?
@@ -11,6 +10,7 @@ typedef struct {
 	TrieNode* nodes;
 	int len;
 } Trie;
+*/
 Trie* Trie_new(int node) {
 	Trie* t = malloc(sizeof(Trie)); if (!t) exit(1);
 	if (!(t->nodes = calloc(node, sizeof(TrieNode)))) exit(1);
@@ -46,27 +46,8 @@ int _Trie_search(TrieNode* node) {
 	}
 	return 1;
 }
-int solve5052(const char strs[][MAXCOL + 1], const int N) {
-	Trie* trie = Trie_new(71110);
-	int ret;
-	for (int i = 0; i < N; i++) {
-		Trie_insert(trie, strs[i]);
-	}
-	ret = _Trie_search(&trie->nodes[0]);
-	Trie_delete(trie);
-	return ret;
-}
-int main() {
-	static char strs[MAXROW][MAXCOL + 1];
-	int _t;
-	scanf("%d", &_t);
-	while (_t--) {
-		int N;
-		scanf("%d", &N);
-		for (int i = 0; i < N; i++) { scanf("%s", strs[i]); }
-		switch (solve5052(strs, N)) {
-		case 0: printf("NO\n"); break;
-		case 1: printf("YES\n"); break;
-		}
-	}
-}
+
+
+/*
+* 2023.7.19 Wed
+*/

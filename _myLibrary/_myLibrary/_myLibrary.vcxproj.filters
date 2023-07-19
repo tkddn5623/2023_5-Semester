@@ -63,6 +63,9 @@
     <ClInclude Include="QuickSort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Data Structures\Trie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Main.c">
@@ -109,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="QuickSort.c">
       <Filter>Source Files\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="Data Structures\Trie.c">
+      <Filter>Source Files\Data Structures</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

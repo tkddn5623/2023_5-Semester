@@ -8,9 +8,9 @@ int* KMP_Matcher(const char text[], const char pattern[]) {
 	static int prefix[MAXLEN];
 	const int len_text = strlen(text);
 	const int len_ptrn = strlen(pattern);
-	int* answerlist = calloc(len_text - len_ptrn + 2, sizeof(int));
+	int* answerlist;
 	int answersize = 0;
-	if (!answerlist) exit(1);
+	if (!(answerlist = calloc(len_text - len_ptrn + 2, sizeof(int)))) exit(1);
 	if (len_text < len_ptrn) return answerlist;
 
 	// Compute-Prefix-Function

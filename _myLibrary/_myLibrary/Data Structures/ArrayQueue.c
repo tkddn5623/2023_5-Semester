@@ -62,7 +62,7 @@ typedef struct {
 } ArrayQueue;
 ArrayQueue* AQ_new(int max) {
 	ArrayQueue* pqueue;
-	if (!(pqueue = malloc(sizeof(ArrayQueue)))) exit(1);
+	if (!(pqueue = calloc(1, sizeof(ArrayQueue)))) exit(1);
 	if (!(pqueue->items = calloc(max, sizeof(Element)))) exit(1);
 	return pqueue;
 }

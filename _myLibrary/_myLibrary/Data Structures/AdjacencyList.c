@@ -71,12 +71,46 @@ int travelingSalesman(Graph* graph) {
 	memset(memo, -1, sizeof(memo));
 	return _travelingSalesman_impl(graph, memo, HOME, 1 << HOME);
 }
+
+/////////////////////////////////////////////////////////////////////////////
+
+void _Indgree(int* indgree, Graph* graph) {
+    int vtxsize = graph->vtxsize;
+    int edgecount = graph->edgecount;
+    const GNode* _edges = graph->_edges;
+    for (int i = vtxsize; i < edgecount; i++) {
+        indgree[_edges[i].id]++;
+    }
+}
+void Topological_Sort(int* sorted, Graph* graph) {
+    const int vtxmax = graph->vtxsize - 1;
+    ArrayQueue* queue = AQ_new(vtxmax + 1);
+    int* indgree = calloc(vtxmax + 1, sizeof(int)); if (!indgree) exit(1);
+    int sorted_len = 0;
+    _Indgree(indgree, graph);
+    for (int i = 1; i <= vtxmax; i++) {
+        if (indgree[i] > 0) continue;
+        AQ_push(queue, i);
+    }
+    while (!AQ_isEmpty(queue)) {
+        int vtx = AQ_pop(queue);
+        sorted[sorted_len++] = vtx;
+        GNode* head = &graph->_edges[vtx];
+        for (GNode* cur = head->next; cur != head; cur = cur->next) {
+            if (--indgree[cur->id] > 0) continue;
+            AQ_push(queue, cur->id);
+        }
+    }
+    AQ_delete(queue);
+    free(indgree);
+}
 */
 
 /*
 * 2022.9.21 Wed
 * 2023.1.6  Fri, improved speed.
 * 2023.1.27 Fri, example changed to TSP.
+* 2023.7.18 Tue, example add (Topological_Sort)
 */
 
 /*

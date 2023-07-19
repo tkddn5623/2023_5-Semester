@@ -9,16 +9,14 @@ typedef struct {
 	int rear;
 } ArrayDeque;
 */
-ArrayDeque* AD_newDeque(const int max) {
+ArrayDeque* AD_new(int max) {
 	ArrayDeque* pdeque;
-	if ((pdeque = malloc(sizeof(ArrayDeque))) == NULL) exit(1);
+	if ((pdeque = calloc(1, sizeof(ArrayDeque))) == NULL) exit(1);
 	if ((pdeque->items = calloc(max + 1, sizeof(Element))) == NULL) exit(1);
 	pdeque->capacity = max + 1;
-	pdeque->front = 0;
-	pdeque->rear = 0;
 	return pdeque;
 }
-void AD_deleteDeque(ArrayDeque* pdeque) {
+void AD_delete(ArrayDeque* pdeque) {
 	free(pdeque->items);
 	free(pdeque);
 }
@@ -40,12 +38,12 @@ Element AD_back(const ArrayDeque* pdeque) {
 	const int capacity = pdeque->capacity;
 	return pdeque->items[(pdeque->rear + capacity - 1) % capacity];
 }
-void AD_pushFront(ArrayDeque* pdeque, const Element item) {
+void AD_pushFront(ArrayDeque* pdeque, Element item) {
 	const int capacity = pdeque->capacity, behind = (pdeque->front + capacity - 1) % capacity;
 	pdeque->items[behind] = item;
 	pdeque->front = behind;
 }
-void AD_pushBack(ArrayDeque* pdeque, const Element item) {
+void AD_pushBack(ArrayDeque* pdeque, Element item) {
 	const int rear = pdeque->rear;
 	pdeque->items[rear] = item;
 	pdeque->rear = (rear + 1) % pdeque->capacity;

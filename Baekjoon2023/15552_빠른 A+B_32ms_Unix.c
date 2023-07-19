@@ -47,3 +47,18 @@ int main() {
 	solve15552();
 	munmap(map, st.st_size);
 }
+
+/*
+#include <sys/stat.h>
+#include <sys/mman.h>
+
+static char* map;
+
+void _map() {
+    struct stat st;
+    fstat(0, &st);
+    if ((map = mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, 0, 0)) == MAP_FAILED) return; 
+}
+
+// Use _exit or exit
+*/

@@ -8,7 +8,7 @@ typedef struct {
 	int top;
 } ArrayStack;
 */
-ArrayStack* AS_newStack(const int max) {
+ArrayStack* AS_new(int max) {
 	ArrayStack* pstack;
 	if ((pstack = malloc(sizeof(ArrayStack))) == NULL) exit(1);
 	if ((pstack->items = calloc(max, sizeof(Element))) == NULL) exit(1);
@@ -16,7 +16,7 @@ ArrayStack* AS_newStack(const int max) {
 	pstack->top = -1;
 	return pstack;
 }
-void AS_deleteStack(ArrayStack* pstack) {
+void AS_delete(ArrayStack* pstack) {
 	free(pstack->items);
 	free(pstack);
 }
@@ -32,7 +32,7 @@ int AS_size(const ArrayStack* pstack) {
 Element AS_peek(const ArrayStack* pstack) {
 	return pstack->items[pstack->top];
 }
-void AS_push(ArrayStack* pstack, const Element item) {
+void AS_push(ArrayStack* pstack, Element item) {
 	pstack->items[++(pstack->top)] = item;
 }
 Element AS_pop(ArrayStack* pstack) {
