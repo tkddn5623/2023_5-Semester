@@ -10,7 +10,7 @@ void writeint(int n) {
 	char s[12] = { '0' };
 	int i = 0;
 	int j = 1000;
-	while (n > 0 && !(n / j)) { j /= 10; }
+	while (j > 0 && !(n / j)) { j /= 10; }
 	do {
 		s[i++] = '0' | n / j;
 		n %= j;

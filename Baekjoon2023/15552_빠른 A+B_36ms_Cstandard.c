@@ -6,7 +6,7 @@ static char output[5000001];
 static int output_i;
 void writeint(int n) {
 	int j = 1000;
-	while (n > 1 && !(n / j)) { j /= 10; }
+	while (j > 1 && !(n / j)) { j /= 10; }
 	do {
 		output[output_i++] = '0' | n / j;
 		n %= j;
@@ -15,6 +15,21 @@ void writeint(int n) {
 	output[output_i++] = '\n';
 }
 /*
+void writeint(int n) {
+    int j = MAXINT;
+    if (n < 0) {
+        output[output_i++] = '-';
+        n = -n;
+    }
+    while (j > 1 && !(n / j)) { j /= 10; }
+    do {
+        output[output_i++] = '0' | n / j;
+        n %= j;
+        j /= 10;
+    } while (j);
+    output[output_i++] = '\n';
+}
+
 int readint() {
     int a, b, c;
     while ((c = *input) && c < '-') input++;
