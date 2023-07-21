@@ -5,6 +5,6 @@ typedef int Element;
 
 #ifndef MERGE_SORT_H
 #define MERGE_SORT_H
-void _MergeSort_impl(Element* const list, Element* const sorted, const int left, const int right);
-Element* MergeSort(Element* list, const int size);
+void _MergeSort_impl(Element* list, Element* sorted, const int left, const int right);
+Element* MergeSort(Element* list, int size);
 #endif
