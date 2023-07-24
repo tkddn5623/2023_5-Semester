@@ -174,6 +174,9 @@
     <ClCompile Include="QuickSort.c" />
     <ClCompile Include="_Main.c" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Snippets\psinit.snippet" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
