@@ -15,16 +15,16 @@ int* KMP_Matcher(const char text[], const char pattern[]) {
 
 	// Compute-Prefix-Function
 	prefix[1] = 0;
-	for (int i = 1, k = 0; i < len_ptrn; i++) {
-		while (k > 0 && pattern[k] != pattern[i])
+	for (int k = 0, i = 1; i < len_ptrn; i++) {
+		while (k > 0 && pattern[i] != pattern[k])
 			k = prefix[k];
-		if (pattern[k] == pattern[i])
+		if (pattern[i] == pattern[k])
 			k = k + 1;
 		prefix[i + 1] = k;
 	}
 
 	// KMP-Matcher
-	for (int i = 0, q = 0; i < len_text; i++) {
+	for (int q = 0, i = 0; i < len_text; i++) {
 		while (q > 0 && text[i] != pattern[q])
 			q = prefix[q];
 		if (text[i] == pattern[q])

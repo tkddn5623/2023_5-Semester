@@ -1,4 +1,4 @@
-int binary_first(const int arr[], int size, int key) {
+int Binary_first(const int arr[], int size, int key) {
 	int pos = -1, left = 0, mid;
 	size = size - 1;
 	while (left <= size) {
@@ -12,7 +12,7 @@ int binary_first(const int arr[], int size, int key) {
 	}
 	return pos;
 }
-int binary_last(const int arr[], int size, int key) {
+int Binary_last(const int arr[], int size, int key) {
 	int pos = -1, left = 0, mid;
 	size = size - 1;
 	while (left <= size) {
@@ -26,7 +26,7 @@ int binary_last(const int arr[], int size, int key) {
 	}
 	return pos;
 }
-int binary_least_greater(const int arr[], int size, int key) {
+int Binary_least_greater(const int arr[], int size, int key) {
 	int pos = -1, left = 0, mid;
 	size = size - 1;
 	while (left <= size) {
@@ -39,7 +39,7 @@ int binary_least_greater(const int arr[], int size, int key) {
 	}
 	return pos;
 }
-int binary_greatest_less(const int arr[], int size, int key) {
+int Binary_greatest_less(const int arr[], int size, int key) {
 	int pos = -1, left = 0, mid;
 	size = size - 1;
 	while (left <= size) {
