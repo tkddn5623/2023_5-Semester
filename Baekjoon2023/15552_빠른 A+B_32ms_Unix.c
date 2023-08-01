@@ -30,14 +30,6 @@ void writeint(int n) {
     } while (j);
     output[output_i++] = '\n';
 }
-
-int readint() {
-    int a, b, c;
-    while ((c = *input) && c < '-') input++;
-    if (c == '-') input++;
-    for (b = *input++ & 0xf; (a = *input++) >= '0'; b = b * 10 + (a & 0xf));
-    return c == '-' ? -b : b;
-}
 */
 int readint() {
 	int a, b;
@@ -45,6 +37,14 @@ int readint() {
 	for (b = a & 0xf; (a = *map++) >= '0'; b = b * 10 + (a & 0xf));
 	return b;
 }
+/*
+int readint() {
+    int a, b, c;
+    while ((c = *map++) && c < '-');
+    for (b = c < '0' ? 0 : c & 0xf; (a = *map++) >= '0'; b = b * 10 + (a & 0xf));
+    return c == '-' ? -b : b;
+}
+*/
 void solve15552() {
 	int T = readint();
 	int a, b;
