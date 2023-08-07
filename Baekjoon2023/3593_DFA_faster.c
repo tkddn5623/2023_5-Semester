@@ -6,7 +6,7 @@
 #define MAXROW (5000)
 #define MAXLEN (30)
 #define MAXSYMBOL (26)
-int INL, TOTALJ1, TOTALJ2;
+int INL, TOTALJ1, TOTALJ2, OL, WTOTALSIZE;
 typedef struct {
     int e1;
     int e2;
@@ -123,7 +123,9 @@ int Hopcroft(const char* strs[], const int N) {
         if ((w = worksets[worksets_idx]) == -1) break;
         //printf("~~~~~~~~~~~~~~~~~~w is %d, size %d\n", w, partitions_size[w]);
         //if (partitions_size[w] == 1) continue;
+        WTOTALSIZE += partitions_size[w];
         for (int i = 0; i < MAXSYMBOL; i++) {
+            OL++;
             int imageset_size = 0;
             memset(partitions_image_size, 0, partitions_cnt * sizeof(int));
             for (int k = partitions_size[w], j = 0; j < k; j++) {
@@ -192,7 +194,7 @@ int Hopcroft(const char* strs[], const int N) {
                     partitions_image_size[j] = 0;
                     partitions_image_size[partitions_cnt - 1] = p1size;
                 }
-                if (w == j) {
+                if (w == j) { // IN BOJ 3593, THIS SECTION RARELY RUNS.(almost never) 
                     worksets_idx--;
                     worksets[worksets_cnt++] = partitions_cnt - 1;
                     goto ESCAPE;
@@ -215,7 +217,7 @@ int Hopcroft(const char* strs[], const int N) {
 int main() {
     //FILE* fo = fopen("o.txt", "w");
     static char fpath[15] = "./tests/"
-        "20";
+        "29";
     freopen(fpath, "r", stdin);
     FILE* FANS = fopen(strcat(fpath, ".a"), "r");
     static int ANSW;
@@ -246,6 +248,7 @@ int main() {
     printf("%d\n", ANSW);
     double ET = (double)clock() / CLOCKS_PER_SEC;
     printf("Time : %.3f\n", ET - RT);
-    printf("INL %d\n", INL);
+    printf("INL %d, OL %d.\n", INL, OL);
     printf("TOTALJ %d, %d.\n", TOTALJ1, TOTALJ2);
+    printf("TOTAL WORK SIZE %d\n", WTOTALSIZE);
 }
