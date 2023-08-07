@@ -89,14 +89,15 @@ int Hopcroft(const char* strs[], const int N) {
     static int imageset[MAXROW * MAXLEN + 1];
     int partitions_cnt, worksets_idx, worksets_cnt;
 
+    memset(inv_pointer, -1, sizeof(inv_pointer));
+    memset(state_part_pointer, -1, sizeof(state_part_pointer));
+    memset(worksets, -1, sizeof(worksets));
     AM_construct(&am, strs, inv_pointer, N);
     partitions_cnt = 3;
     worksets_idx = 0;
     worksets_cnt = 2;
     if (!(partitions[1] = calloc(N * MAXLEN + 1, sizeof(int)))) exit(1);
     if (!(partitions[2] = calloc(N * MAXLEN + 1, sizeof(int)))) exit(1);
-    memset(state_part_pointer, -1, sizeof(state_part_pointer));
-    memset(worksets, -1, sizeof(worksets));
     worksets[0] = 1;
     worksets[1] = 2;
     for (int j = am.len, i = 0; i < j; i++) {
@@ -109,41 +110,50 @@ int Hopcroft(const char* strs[], const int N) {
             state_part_pointer[i] = 2;
         }
     }
-    //printf("%d-%d\n", partitions_size[1], partitions_size[2]);
+    /*for (int i = 0; i < am.len; i++) {
+        printf("The %3d state\n", i);
+        for (int j = 0; j < MAXSYMBOL; j++) {
+            if (!am.states[i].next[j]) continue;
+            printf("[%c]->%3d\n", j + 'a', am.states[i].next[j]);
+        }
+    }*/
     while (1) {
         int w;
+        //printf("Current widx [%d], wcnt [%d]\n", worksets_idx, worksets_cnt);
         if ((w = worksets[worksets_idx]) == -1) break;
         //printf("~~~~~~~~~~~~~~~~~~w is %d, size %d\n", w, partitions_size[w]);
         //if (partitions_size[w] == 1) continue;
-        if (partitions_size[w] < 1) {
-            //printf("W: %d, size: %d\n", w, partitions_size[w]);
-            exit(-1); //Debug code
-        }
         for (int i = 0; i < MAXSYMBOL; i++) {
             int imageset_size = 0;
             memset(partitions_image_size, 0, partitions_cnt * sizeof(int));
             for (int k = partitions_size[w], j = 0; j < k; j++) {
                 int state;
-                if (!(state = inv_pointer[partitions[w][j]][i])) continue;
+                if ((state = inv_pointer[partitions[w][j]][i]) == -1) continue;
                 imageset[imageset_size++] = state;
                 partitions_image_size[state_part_pointer[state]]++;
-                //printf("Temp %d raise the idx %d\n", state, state_part_pointer[state]);
-
             }
             MergeSort(imageset, imageset_size);
+            /*printf("ALPHA: %c\n", i + 'a');
+            for (int j = 1; j < partitions_cnt; j++) {
+                printf("Partition %d\n", j);
+                for (int k = 0; k < partitions_size[j]; k++) {
+                    printf("[%d], ", partitions[j][k]);
+                }
+                putchar('\n');
+            }*/
             for (int j = 1; j < partitions_cnt; j++) {
                 TOTALJ1++;
                 int* p1, * p2, p1size, p2size, p0size;
                 //printf("(j %d), Jump condition: %d,%d\n", j, partitions_image_size[j], partitions_size[j]);
-                if (partitions_image_size[j] == 0 || partitions_size[j] == 0 ||
+                if (partitions_image_size[j] == 0 || partitions_size[j] <= 1 ||
                     partitions_image_size[j] == partitions_size[j]) continue;
+                //printf("Not jump, run\n");
                 p0size = partitions_size[j];
                 p1size = 0;
                 p2size = 0;
-                p1 = calloc(p0size, sizeof(int));
-                p2 = calloc(p0size, sizeof(int));
+                if (!(p1 = calloc(p0size, sizeof(int)))) exit(1);
+                if (!(p2 = calloc(p0size, sizeof(int)))) exit(1);
                 TOTALJ2++;
-                if (!p1 | !p2) exit(1);
                 for (int k = 0; k < p0size; k++) {
                     INL++;
                     int state = partitions[j][k];
@@ -154,15 +164,16 @@ int Hopcroft(const char* strs[], const int N) {
                     else p2[p2size++] = state;
                 }
                 //printf("p1size %d, p2size %d\n", p1size, p2size);
-                //worksets[worksets_cnt++] = partitions_cnt;
                 free(partitions[j]);
                 p1 = realloc(p1, p1size * sizeof(int));
                 p2 = realloc(p2, p2size * sizeof(int));
+                //printf("FFFFFFF(%d - %d)FFFFFFFF\n", p1size, p2size);
                 if (p1size <= p2size) {
                     partitions[j] = p1;
                     partitions[partitions_cnt] = p2;
                     partitions_size[j] = p1size;
                     partitions_size[partitions_cnt++] = p2size;
+                    //printf("~This makes %d part\n", partitions_cnt - 1);
                     for (int k = 0; k < p2size; k++) {
                         state_part_pointer[p2[k]] = partitions_cnt - 1;
                     }
@@ -176,21 +187,24 @@ int Hopcroft(const char* strs[], const int N) {
                     for (int k = 0; k < p1size; k++) {
                         state_part_pointer[p1[k]] = partitions_cnt - 1;
                     }
+                    /*printf("TTTThis partitions_cn: %d\n", partitions_cnt - 1);
+                    printf("Setting size %d\n", p1size);*/
                     partitions_image_size[j] = 0;
-                    partitions_image_size[partitions_cnt] = p1size;
+                    partitions_image_size[partitions_cnt - 1] = p1size;
                 }
-                if (_Hopcroft_set_exist(worksets, worksets_idx + 1, worksets_cnt, j)) {
-                    worksets[worksets_cnt++] = partitions_cnt - 1;
-                }
-                else if (w == j) {
+                if (w == j) {
                     worksets_idx--;
+                    worksets[worksets_cnt++] = partitions_cnt - 1;
                     goto ESCAPE;
                 }
-
+                else if (_Hopcroft_set_exist(worksets, worksets_idx + 1, worksets_cnt, j)) {
+                    worksets[worksets_cnt++] = j;
+                    worksets[worksets_cnt++] = partitions_cnt - 1;
+                }
+                else {
+                    worksets[worksets_cnt++] = j;
+                }
             }
-
-
-
         } ESCAPE:;
         worksets_idx++;
     }
@@ -201,13 +215,13 @@ int Hopcroft(const char* strs[], const int N) {
 int main() {
     //FILE* fo = fopen("o.txt", "w");
     static char fpath[15] = "./tests/"
-        "03";
+        "20";
     freopen(fpath, "r", stdin);
     FILE* FANS = fopen(strcat(fpath, ".a"), "r");
     static int ANSW;
     fscanf(FANS, "%d", &ANSW);
 
-    static char text[MAXROW][MAXLEN + 1];
+    static char text[MAXROW][MAXLEN + 2];
     static const char* ptext[MAXROW];
     int N;
     scanf("%d ", &N);
@@ -231,7 +245,7 @@ int main() {
     printf("%d\n", Hopcroft(ptext, N));
     printf("%d\n", ANSW);
     double ET = (double)clock() / CLOCKS_PER_SEC;
-    printf("Time : %f\n", ET - RT);
+    printf("Time : %.3f\n", ET - RT);
     printf("INL %d\n", INL);
     printf("TOTALJ %d, %d.\n", TOTALJ1, TOTALJ2);
 }
