@@ -24,7 +24,6 @@ typedef struct {
     int next[MAXSYMBOL];
     int accept;
     int partition;
-    int me;
 } State_t;
 typedef struct _Node_int_t {
     int value;
