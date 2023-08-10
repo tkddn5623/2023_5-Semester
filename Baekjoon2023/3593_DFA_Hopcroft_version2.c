@@ -170,7 +170,7 @@ void Hopcroft_Minimization(Automaton_t* pa) {
             invStack.top = -1;
             for (Node_state_t* cur = partitions[work_number].head; cur != NULL; cur = cur->next) {
                 for (Node_int_t* prev = cur->state.prev_head[c]; prev != NULL; prev = prev->next) {
-                    int node_num = prev->value, part_num;
+                    int node_num, part_num;
                     if (inverseList.inlist[node_num = prev->value]) continue;
                     part_num = nodes[node_num].state.partition;
                     inverseList.inlist[node_num] = 1;
